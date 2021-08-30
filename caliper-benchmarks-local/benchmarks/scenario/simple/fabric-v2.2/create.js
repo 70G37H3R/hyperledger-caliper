@@ -1,0 +1,67 @@
+"use strict";
+
+const { WorkloadModuleBase } = require("@hyperledger/caliper-core");
+
+const SensorID = ["sensor1", "sensor2"];
+const Temp = [
+  "8.5",
+  "23.45",
+  "30",
+  "17.2",
+  "14.4",
+  "18.1",
+  "24",
+  "5.3",
+  "10.5",
+  "27.2",
+];
+const Time = [
+  "23.08.2021 15:35:33",
+  "24.08.2021 12:01:23",
+  "25.08.2021 07:01:15",
+  "22.08.2021 22:10:33",
+  "21.08.2021 04:05:12",
+  "20.08.2021 23:02:11",
+];
+
+/**
+ * Workload module for the benchmark round.
+ */
+class CreateDataWorkload extends WorkloadModuleBase {
+  /**
+   * Initializes the workload module instance.
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Assemble TXs for the round.
+   * @return {Promise<TxStatus[]>}
+   */
+  async submitTransaction() {
+    let IdSensor = SensorID[Math.floor(Math.random() * SensorID.length)];
+    let TempSensor = Temp[Math.floor(Math.random() * Temp.length)];
+    let TimeSensor = Time[Math.floor(Math.random() * Time.length)];
+
+    let args = {
+      contractId: "mycc",
+      contractVersion: "v1",
+      contractFunction: "addTemp",
+      contractArguments: [IdSensor, TempSensor, TimeSensor],
+      timeout: 30,
+    };
+
+    await this.sutAdapter.sendRequests(args);
+  }
+}
+
+/**
+ * Create a new instance of the workload module.
+ * @return {WorkloadModuleInterface}
+ */
+function createWorkloadModule() {
+  return new CreateDataWorkload();
+}
+
+module.exports.createWorkloadModule = createWorkloadModule;
