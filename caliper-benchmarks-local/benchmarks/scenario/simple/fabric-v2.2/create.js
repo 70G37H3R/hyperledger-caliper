@@ -40,8 +40,7 @@ class CreateDataWorkload extends WorkloadModuleBase {
       (today.getMonth() + 1) +
       "." +
       today.getFullYear();
-    var time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = date + " " + time;
 
     let IdSensor = SensorID[Math.floor(Math.random() * SensorID.length)];
