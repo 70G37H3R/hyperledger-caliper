@@ -44,8 +44,8 @@ class CreateDataWorkload extends WorkloadModuleBase {
     var dateTime = date + " " + time;
 
     let IdSensor = SensorID[Math.floor(Math.random() * SensorID.length)];
-    let TempSensor = dateTime;
-    let TimeSensor = Time[Math.floor(Math.random() * Time.length)];
+    let TempSensor = Temp[Math.floor(Math.random() * Temp.length)];
+    let TimeSensor = dateTime;
 
     let args = {
       contractId: "mycc",
