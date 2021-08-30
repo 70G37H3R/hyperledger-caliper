@@ -25,6 +25,7 @@ class CreateDataWorkload extends WorkloadModuleBase {
    */
   constructor() {
     super();
+    this.txIndex = 0;
   }
 
   /**
@@ -33,19 +34,11 @@ class CreateDataWorkload extends WorkloadModuleBase {
    */
   async submitTransaction() {
     // get current time
-    var today = new Date();
-    var date =
-      today.getDate() +
-      "." +
-      (today.getMonth() + 1) +
-      "." +
-      today.getFullYear();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + " " + time;
+    this.txIndex++;
 
     let IdSensor = SensorID[Math.floor(Math.random() * SensorID.length)];
     let TempSensor = Temp[Math.floor(Math.random() * Temp.length)];
-    let TimeSensor = dateTime;
+    let TimeSensor = 'Client' + this.workerIndex + '_Time' + this.txIndex.toString();
 
     let args = {
       contractId: "mycc",
