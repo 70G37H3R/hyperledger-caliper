@@ -19,7 +19,7 @@ test:
         opts:
           tps: 40
       workload:
-        module: benchmarks/scenario/simple/pavan-v2.2/createCar.js
+        module: benchmarks/scenario/simple/fabric-v2.2/create.js
     # - label: Query a car.
     #   rateControl:
     #     - type: fixed-load
@@ -37,7 +37,7 @@ test:
         opts:
           tps: 220
       workload:
-        module: benchmarks/scenario/simple/pavan-v2.2/queryCar.js
+        module: benchmarks/scenario/simple/fabric-v2.2/query.js
     # - label: Query_Car_1
     #   txDuration:
     #   - 30
