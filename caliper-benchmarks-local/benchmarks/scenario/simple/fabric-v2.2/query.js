@@ -13,6 +13,8 @@ class QueryDataWorkload extends WorkloadModuleBase {
    */
   constructor() {
     super();
+    this.txIndex = 0;
+    this.limitIndex = 0;
   }
 
   /**
@@ -37,7 +39,8 @@ class QueryDataWorkload extends WorkloadModuleBase {
    * @return {Promise<TxStatus[]>}
    */
   async submitTransaction() {
-    let IdSensor = "user1";
+    this.txIndex++;
+    let IdSensor = 'Client' + this.workerIndex + '_Sensor' + this.txIndex.toString();
 
     let args = {
       contractId: "mycc",
@@ -47,6 +50,10 @@ class QueryDataWorkload extends WorkloadModuleBase {
       timeout: 30,
       readOnly: true,
     };
+    
+    if (this.txIndex === this.limitIndex) {
+            this.txIndex = 0;
+    }
 
     await this.sutAdapter.sendRequests(args);
   }
