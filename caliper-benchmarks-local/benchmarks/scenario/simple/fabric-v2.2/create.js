@@ -24,6 +24,10 @@ const Time = [
   "21.08.2021 04:05:12",
   "20.08.2021 23:02:11",
 ];
+
+const randomNo = [ "0","1","2","3","4","5","6","7","8","9"];
+const randomNo = [ "10","11","12","13","14","15","16","17","18","19"];
+
 /**
  * Workload module for the benchmark round.
  */
@@ -43,7 +47,7 @@ class CreateDataWorkload extends WorkloadModuleBase {
   async submitTransaction() {
     // get current time
     this.txIndex++;
-
+    let ranNo = randomNo[Math.floor(Math.random() * randomNo.length)];
     let IdSensor = 'Client' + this.workerIndex + '_Sensor' + this.txIndex.toString();
     let TempSensor = Temp[Math.floor(Math.random() * Temp.length)];
     let TimeSensor = Time[Math.floor(Math.random() * Time.length)];
